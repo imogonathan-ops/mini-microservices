@@ -37,6 +37,9 @@ services:
       - RABBIT_USER=${RABBIT_USER}
       - RABBIT_PASS=${RABBIT_PASS}
       - RABBIT_URL=amqp://${RABBIT_USER}:${RABBIT_PASS}@rabbitmq:5672
+      - USERS_URL=http://users:3001
+      - ORDERS_URL=http://orders:3002
+      - NOTIF_URL=http://notif:3003
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -51,5 +54,50 @@ services:
     volumes:
       - n8n_data:/home/node/.n8n
 
+  mosquitto:
+    image: eclipse-mosquitto:2
+    ports: ["1883:1883"]
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  db:
+    image: timescale/timescaledb:latest-pg16
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=iot
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    image: redis:7-alpine
+
+  ingestion:
+    build: ./ingestion-service
+    environment:
+      - MQTT_URL=mqtt://mosquitto:1883
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASS}@db:5432/iot
+      - REDIS_URL=redis://redis:6379
+    depends_on: [mosquitto, db, redis]
+
+  sensor-simulator:
+    build: ./sensor-simulator
+    environment:
+      - MQTT_URL=mqtt://mosquitto:1883
+    depends_on: [mosquitto]
+
+  grafana:
+    image: grafana/grafana
+    ports: ["3000:3000"]
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+  mailpit:
+    image: axllent/mailpit
+    ports: ["8025:8025"]
+
 volumes:
   n8n_data:
+  db_data:
+  grafana_data:
