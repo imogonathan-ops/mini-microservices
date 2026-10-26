@@ -1,0 +1,21 @@
+{
+  "name": "notif-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "consume.js",
+  "scripts": {
+    "start": "node src/consume.js",
+    "dev": "nodemon src/consume.js",
+    "test": "echo \"no tests\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "amqplib": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
