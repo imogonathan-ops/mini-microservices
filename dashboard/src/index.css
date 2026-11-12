@@ -109,3 +109,352 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+
+/* ============================================
+   ROOT CSS - Variables & Styles de Base
+   Palette inspirée de Lumina
+   ============================================ */
+
+:root {
+    /* === Couleurs Primaires (Cheveux Lumina - Cyan/Bleu clair) === */
+    --color-primary: #7DD3E1;
+    --color-primary-light: #A8E4ED;
+    --color-primary-dark: #5BB8C9;
+    --color-primary-pale: #C5EEF4;
+
+    /* === Couleurs Secondaires (Robe - Bleu Marine) === */
+    --color-secondary: #3D4F6F;
+    --color-secondary-light: #5A6B8A;
+    --color-secondary-dark: #2C3A52;
+    --color-secondary-pale: #6B7D9C;
+
+    /* === Couleurs d'Accent (Pendentif Atome - Or/Jaune) === */
+    --color-accent: #F5B942;
+    --color-accent-light: #F9D060;
+    --color-accent-dark: #E09B1A;
+    --color-accent-glow: #FFE082;
+
+    /* === Couleurs Neutres (Fond beige & Blouse blanche) === */
+    --color-background: #F5F0E8;
+    --color-background-light: #FFFDF9;
+    --color-background-dark: #E8E0D4;
+    --color-white: #FFFFFF;
+    --color-white-soft: #FAF8F5;
+
+    /* === Couleurs des Yeux (Orange/Ambre) === */
+    --color-eyes: #D4944C;
+    --color-eyes-light: #E5AD6A;
+    --color-eyes-dark: #B87A35;
+
+    /* === Couleurs de Texte === */
+    --color-text-primary: #2C3A52;
+    --color-text-secondary: #5A6B8A;
+    --color-text-light: #8A9BB5;
+    --color-text-inverse: #FFFFFF;
+
+    /* === Couleurs de Statut === */
+    --color-success: #6ECF8E;
+    --color-success-light: #A8E5BC;
+    --color-warning: #F5B942;
+    --color-warning-light: #FFE082;
+    --color-error: #E57373;
+    --color-error-light: #FFAB91;
+    --color-info: #7DD3E1;
+    --color-info-light: #A8E4ED;
+
+    /* === Couleurs des Cartes === */
+    --color-card-red: #C62828;
+    --color-card-black: #212121;
+    --color-card-back: var(--color-secondary);
+    --color-card-face: var(--color-white);
+
+    /* === Typographie === */
+    --font-family-primary: 'Nunito', 'Segoe UI', sans-serif;
+    --font-family-display: 'Poppins', 'Segoe UI', sans-serif;
+    --font-family-mono: 'Fira Code', 'Consolas', monospace;
+
+    --font-size-xs: 0.75rem;
+    /* 12px */
+    --font-size-sm: 0.875rem;
+    /* 14px */
+    --font-size-base: 1rem;
+    /* 16px */
+    --font-size-md: 1.125rem;
+    /* 18px */
+    --font-size-lg: 1.25rem;
+    /* 20px */
+    --font-size-xl: 1.5rem;
+    /* 24px */
+    --font-size-2xl: 2rem;
+    /* 32px */
+    --font-size-3xl: 2.5rem;
+    /* 40px */
+    --font-size-4xl: 3rem;
+    /* 48px */
+
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* === Espacements === */
+    --spacing-xs: 0.25rem;
+    /* 4px */
+    --spacing-sm: 0.5rem;
+    /* 8px */
+    --spacing-md: 1rem;
+    /* 16px */
+    --spacing-lg: 1.5rem;
+    /* 24px */
+    --spacing-xl: 2rem;
+    /* 32px */
+    --spacing-2xl: 3rem;
+    /* 48px */
+    --spacing-3xl: 4rem;
+    /* 64px */
+
+    /* === Bordures === */
+    --border-radius-sm: 0.25rem;
+    /* 4px */
+    --border-radius-md: 0.5rem;
+    /* 8px */
+    --border-radius-lg: 1rem;
+    /* 16px */
+    --border-radius-xl: 1.5rem;
+    /* 24px */
+    --border-radius-full: 9999px;
+
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 4px;
+
+    /* === Ombres === */
+    --shadow-sm: 0 1px 2px rgba(44, 58, 82, 0.05);
+    --shadow-md: 0 4px 6px rgba(44, 58, 82, 0.1);
+    --shadow-lg: 0 10px 15px rgba(44, 58, 82, 0.15);
+    --shadow-xl: 0 20px 25px rgba(44, 58, 82, 0.2);
+    --shadow-glow: 0 0 20px rgba(125, 211, 225, 0.4);
+    --shadow-accent-glow: 0 0 20px rgba(245, 185, 66, 0.5);
+
+    /* === Transitions === */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+    --transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* === Z-Index === */
+    --z-index-dropdown: 100;
+    --z-index-sticky: 200;
+    --z-index-fixed: 300;
+    --z-index-modal-backdrop: 400;
+    --z-index-modal: 500;
+    --z-index-popover: 600;
+    --z-index-tooltip: 700;
+    --z-index-lumina: 800;
+
+    /* === Dimensions Cartes === */
+    --card-width: 100px;
+    --card-height: 140px;
+    --card-width-sm: 70px;
+    --card-height-sm: 98px;
+    --card-width-lg: 130px;
+    --card-height-lg: 182px;
+
+    /* === Dimensions Lumina === */
+    --lumina-width: 120px;
+    --lumina-width-sm: 80px;
+    --lumina-width-lg: 160px;
+    --lumina-bubble-max-width: 280px;
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Titres === */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
+}
+
+h1 {
+    font-size: var(--font-size-4xl);
+}
+
+h2 {
+    font-size: var(--font-size-3xl);
+}
+
+h3 {
+    font-size: var(--font-size-2xl);
+}
+
+h4 {
+    font-size: var(--font-size-xl);
+}
+
+h5 {
+    font-size: var(--font-size-lg);
+}
+
+h6 {
+    font-size: var(--font-size-md);
+}
+
+/* === Liens === */
+a {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-primary);
+}
+
+/* === Boutons de base === */
+button {
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+/* === Images === */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* === Listes === */
+ul,
+ol {
+    list-style: none;
+}
+
+/* === Selection === */
+::selection {
+    background-color: var(--color-primary-pale);
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* === Couleurs de fond === */
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary);
+}
+
+.bg-accent {
+    background-color: var(--color-accent);
+}
+
+.bg-white {
+    background-color: var(--color-white);
+}
+
+.bg-background {
+    background-color: var(--color-background);
+}
+
+/* === Couleurs de texte === */
+.text-primary {
+    color: var(--color-primary);
+}
+
+.text-secondary {
+    color: var(--color-secondary);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.text-white {
+    color: var(--color-white);
+}
+
+.text-muted {
+    color: var(--color-text-light);
+}
+
+/* === Ombres === */
+.shadow-sm {
+    box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+    box-shadow: var(--shadow-lg);
+}
+
+.shadow-glow {
+    box-shadow: var(--shadow-glow);
+}
+
+/* === Bordures arrondies === */
+.rounded-sm {
+    border-radius: var(--border-radius-sm);
+}
+
+.rounded-md {
+    border-radius: var(--border-radius-md);
+}
+
+.rounded-lg {
+    border-radius: var(--border-radius-lg);
+}
+
+.rounded-full {
+    border-radius: var(--border-radius-full);
+}

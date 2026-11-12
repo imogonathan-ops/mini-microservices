@@ -1,122 +1,84 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+// src/App.jsx
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const socket = io("http://localhost:3003");
+    socket.on(
+      "mesure",
+      (m) =>
+        setData((
+          d,
+        ) => [...d.slice(-49), {
+          ...m,
+          heure: new Date(m.time).toLocaleTimeString(),
+        }]),
+    );
+    return () => socket.disconnect();
+  }, []);
+
+  const last = data[data.length - 1];
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+    <div style={{ padding: 24 }}>
+      <header
+        style={{
+          position: "relative",
+          display: "flex",
+          alignitems: "center",
+          justifycontent: "center",
+        }}
+      >
+        <div class="hero-content">
+          <h1 id="hero-title" class="hero-title">Dashboard Environment</h1>
+          <p id="hero-subtitle" class="hero-subtitle">
+            Découvrez les jeux de cartes classiques guidés par Lumina
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <div class="hero-background">
+          <div class="hero-card card-1"></div>
+          <div class="hero-card card-2"></div>
+          <div class="hero-card card-3"></div>
+          <div class="hero-card card-4"></div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+      </header>
+      {last && (
+        <div style={{ display: "flex", gap: 16, border: 2 }}>
+          <div>🌡️ {last.temperature} °C</div>
+          <div>💧 {last.humidite} %</div>
+          <div>⏱️ {last.pression} hPa</div>
         </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      )}
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={data}>
+          <XAxis dataKey="heure" />
+          <YAxis />
+          <Tooltip />
+          <Line
+            type="monotone"
+            dataKey="temperature"
+            stroke="#e74c3c"
+            dot={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="humidite"
+            stroke="#3498db"
+            dot={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }
-
-export default App
